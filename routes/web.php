@@ -17,8 +17,11 @@ Route::get('/dashboard', function () {
 Route::prefix('Admin')->middleware(['auth', 'verified'])->group(function() {
 
     Route::get('Users', [UserController::class, 'index'])->name('users');
+    Route::get('User/new', [UserController::class, 'create'])->name('user.create');
 
     Route::get('Products', [ProductController::class, 'index'])->name('products');
+
+    
 });
 ############ 
 
