@@ -31,12 +31,38 @@
                         <tbody>
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6">
-                                    <img src="" class="w-10 h-10 rounded-full">
+                                    <img src="https://www.classicfinefoods-international.com/1123-full_default/live-pink-crayfish.jpg" class="w-10 h-10 rounded-full">
                                 </td>
-                                <td class="py-3 px-6">Product Name</td>
-                                <td class="py-3 px-6">Category</td>
-                                <td class="py-3 px-6">$Price</td>
-                                <td class="py-3 px-6">Stock</td>
+                                <td class="py-3 px-6">CrayFish</td>
+                                <td class="py-3 px-6">Shapat</td>
+                                <td class="py-3 px-6">$50.5</td>
+                                <td class="py-3 px-6">8,000</td>
+                                <td class="py-3 px-6 flex space-x-2">
+                                    <a title="EDIT" href="#" class="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600 transition duration-300">
+                                        EDIT
+                                    </a>
+                                    <form action="#" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="submit"
+                                            class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition duration-300"
+                                            onclick="return confirm('Are you sure you want to delete this product?');">
+                                            DELETE
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6">
+                                    <img src="https://afritibi.com/wp-content/uploads/2017/01/original-2-jpeg.webp" class="w-10 h-10 rounded-full">
+                                </td>
+                                <td class="py-3 px-6">Tilapia</td>
+                                <td class="py-3 px-6">Fishda</td>
+                                <td class="py-3 px-6">$30.5</td>
+                                <td class="py-3 px-6">10,000</td>
                                 <td class="py-3 px-6 flex space-x-2">
                                     <a title="EDIT" href="#" class="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600 transition duration-300">
                                         EDIT
@@ -59,4 +85,6 @@
             </div>
         </div>
     </div>
+
+    
 </x-app-layout>
