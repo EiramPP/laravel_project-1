@@ -15,7 +15,7 @@
                              alt="Image Preview" style="max-width: 64px;" />
                     </div>
 
-                    <form method="POST" action="" enctype="multipart/form-data" class="p-4">
+                    <form method="POST" action="{{ route('product.store')}}" enctype="multipart/form-data" class="p-4">
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
@@ -29,10 +29,14 @@
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                             </div>
                             <div>
-                                <label for="product_category" class="block text-sm font-medium text-gray-700">Category</label>
-                                <select id="product_category" name="product_category"
+                                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                                <select id="category" name="category"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    <option value="" disabled selected>Select a category</option>
+                                    <option value="" disabled selected>Category</option>
+                                    <option value="">Select a category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                                        @endforeach
                                 </select>
                             </div>
                             <div>
