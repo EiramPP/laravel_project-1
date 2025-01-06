@@ -82,7 +82,10 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Products::findOrFail($product_id);
+        $categories = Categories::where('is_deleted',  false);
+
+        return view('product_form', compact('product', 'categories'));
     }
 
     /**
@@ -98,6 +101,14 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Products::findOrFail($product_id);
+        $product->is_deleted = true;
+        $product->save();
+    
+        return redirect()->route('products')->with([
+            'message' => 'Product deleted successfully',
+            'type' => 'success',
+        ]);
+
     }
 }
