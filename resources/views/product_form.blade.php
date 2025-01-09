@@ -29,11 +29,10 @@
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                             </div>
                             <div>
-                                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                                <label for="category" class="block text-sm font-medium text-gray-700">Categor</label>
                                 <select id="category" name="category"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                     <option value="" disabled selected>Categories</option>
-                                    <option value="">Category</option>
                                         @foreach ($categories as $index => $category)
                                             <option value="{{ $category->category_id }}">
                                                 {{$index + 1}}. {{ $category->category_name }}

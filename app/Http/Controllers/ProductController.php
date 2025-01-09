@@ -15,7 +15,11 @@ class ProductController extends Controller
     public function index()
     {
        
-        $products = Products::with('category')->get();
+        // $products = Products::with('category')->get();
+        // return view('products', compact('products'));
+
+        $products = Products::with('category')->where('is_deleted', false)->get();
+        
         return view('products', compact('products'));
     }
     /**
@@ -47,7 +51,7 @@ class ProductController extends Controller
         $filenameWithExtensions = $request->file('product_image')->getClientOriginalName();
        $filenmae = pathinfo($filenameWithExtensions, PATHINFO_FILENAME);
        $extensions = $request->file('product_image')->getClientOriginalExtension();
-       $filenameToStore = $filename . '-' . $extensions;
+       $filenameToStore = $filename . '-' . time() . '-' . $extensions;
        $request->file('product_image')->storeAs('Uploads/Products Images',$filenameToStore);
        $validated['product_image'] = $filenameToStore;
     }
