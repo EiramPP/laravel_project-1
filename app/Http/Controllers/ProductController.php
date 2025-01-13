@@ -15,11 +15,7 @@ class ProductController extends Controller
     public function index()
     {
        
-        // $products = Products::with('category')->get();
-        // return view('products', compact('products'));
-
         $products = Products::with('category')->where('is_deleted', false)->get();
-        
         return view('products', compact('products'));
     }
     /**
@@ -49,18 +45,16 @@ class ProductController extends Controller
 
     if($request->hasFile('product_image')){
         $filenameWithExtensions = $request->file('product_image')->getClientOriginalName();
-       $filenmae = pathinfo($filenameWithExtensions, PATHINFO_FILENAME);
+       $filename = pathinfo($filenameWithExtensions, PATHINFO_FILENAME);
        $extensions = $request->file('product_image')->getClientOriginalExtension();
-       $filenameToStore = $filename . '-' . time() . '-' . $extensions;
+       $filenameToStore = $filename . '-' . $extensions;
        $request->file('product_image')->storeAs('Uploads/Products Images',$filenameToStore);
        $validated['product_image'] = $filenameToStore;
     }
 
-    $product = Product::create($validated);
+    $product = Products::create($validated);
 
-    $product = Product::create($validated);
-
-    if (!$products) {
+    if (!$product) {
         return redirect()->route('products')->with([
             'message' => 'Unable to add product',
             'type' => 'error',
@@ -86,10 +80,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Products::findOrFail($product_id);
-        $categories = Categories::where('is_deleted',  false);
-
-        return view('product_form', compact('product', 'categories'));
+        //
     }
 
     /**
@@ -103,16 +94,17 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $product_id)
     {
-        $product = Products::findOrFail($product_id);
-        $product->is_deleted = true;
-        $product->save();
-    
-        return redirect()->route('products')->with([
-            'message' => 'Product deleted successfully',
-            'type' => 'success',
-        ]);
+        $product = Products::findorfail($product_id);
 
+        $product->is_deleted = true;
+
+        $product->save();
+
+        return redirect()->route('products')->with([
+            'message' => 'Product deleted successfully!',
+            'type' => 'success'
+        ]);
     }
 }

@@ -10,11 +10,15 @@ class Categories extends Model
     use HasFactory;
 
     protected $table = 'categories';
-    protected $primarykey = 'category_id';
-    
+    protected $primaryKey = 'category_id';
 
     protected $fillable = [
         'categories_name',
         'is_deleted'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class, 'category_id');
+    }
 }

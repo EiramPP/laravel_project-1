@@ -36,7 +36,7 @@
                                         <img src="{{ asset('storage/Uploads/Products Images/' . $product->product_image) }}" class="w-10 h-10 rounded-full" alt="Product Image">
                                     </td>
                                     <td class="py-3 px-6">{{ $product->product_name }}</td>
-                                    <td class="py-3 px-6">{{ $product->category->category_name  }}</td> 
+                                    <td class="py-3 px-6">{{ $product->category->categories_name  }}</td> 
                                     <td class="py-3 px-6">{{ $product->price }}</td>
                                     <td class="py-3 px-6">{{ $product->stocks }}</td>
                                     <td class="py-3 px-6 flex space-x-2">
