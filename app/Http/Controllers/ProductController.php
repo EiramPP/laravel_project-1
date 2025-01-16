@@ -78,17 +78,53 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $product_id)
     {
-        //
+        $product = Products::FindOrFail($product_id);
+        $categories = Categories::where('is_deleted', false)->get();
+
+        return view('product_form', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $product_id)
     {
         //
+        $product = Products::FindOrFail($product_id);
+
+            $validated = $request->validate([
+                'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'product_name' => 'required|unique:products,product_name' . $product_id . ',product_id',
+                'category' => 'required|exists:categories,category_id',
+                'price' => 'required|numeric|min:0',
+                'stocks' => 'required|integer|min:0',
+            ]);
+
+        $validated['category_id'] = $request->category;
+
+        if($request->hasFile('product_image')){
+            $filenameWithExtensions = $request->file('product_image')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExtensions, PATHINFO_FILENAME);
+        $extensions = $request->file('product_image')->getClientOriginalExtension();
+        $filenameToStore = $filename . '-' . $extensions;
+        $request->file('product_image')->storeAs('Uploads/Products Images',$filenameToStore);
+        $validated['product_image'] = $filenameToStore;
+        }
+
+        if($product->update($validated)) {
+            return redirect()->route('products')->with([
+                'message' => 'Product added successfully!',
+                'type' => 'success',
+            ]);
+    
+        }
+
+        return redirect()->route('products')->with([
+            'message' => 'Product not successfully!',
+            'type' => 'error',
+        ]);
     }
 
     /**
@@ -96,7 +132,7 @@ class ProductController extends Controller
      */
     public function destroy(string $product_id)
     {
-        $product = Products::findorfail($product_id);
+        $product = Products::FindOrFail($product_id);
 
         $product->is_deleted = true;
 
