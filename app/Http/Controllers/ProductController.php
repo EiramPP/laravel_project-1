@@ -96,7 +96,7 @@ class ProductController extends Controller
 
             $validated = $request->validate([
                 'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'product_name' => 'required|unique:products,product_name' . $product_id . ',product_id',
+                'product_name' => 'required|unique:products,product_name,' . $product_id . ',product_id',
                 'category' => 'required|exists:categories,category_id',
                 'price' => 'required|numeric|min:0',
                 'stocks' => 'required|integer|min:0',

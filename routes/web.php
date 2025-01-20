@@ -39,7 +39,7 @@ Route::prefix('Admin')
 
         Route::get('Product/Edit/{product_id}', [ProductController::class, 'edit'])->name('product.edit');
 
-        Route::put('Products/Edit/{product_id/}Update', [ProductController::class, 'update'])->name('product.update');
+        Route::put('Products/Edit/{product_id}/Update', [ProductController::class, 'update'])->name('product.update');
 
         Route::delete('Products/Delete/{product_id}', [ProductController::class, 'destroy'])->name('product.delete');
         

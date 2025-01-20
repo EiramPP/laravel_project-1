@@ -37,7 +37,7 @@
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                     <option value="" disabled selected>Select a category</option>
                                     @foreach ($categories as $index => $category)
-                                        <option value="{{ $category->category_id }}" {{ isset ($product) && $product->categoeries_id == $category->category_id ? 'selected' : ''}}>{{$index + 1 }}. {{ $category->category_name }} </option>
+                                        <option value="{{ $category->category_id }}" {{ isset ($product) && $product->category_id == $category->category_id ? 'selected' : ''}}>{{$index + 1 }}. {{ $category->category_name }} </option>
                                     @endforeach
                                 </select>
                             </div>  
